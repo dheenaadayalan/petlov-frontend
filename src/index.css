@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+  border-radius: 50%;
+}
+
+body::-webkit-scrollbar-track {
+  background: none; /* color of the tracking area */
+  margin: 20px;
+  border-radius: 50%;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #222831; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #eeeeee; /* creates padding around scroll thumb */
+  margin: 20px;
+}
+
+
+
+
+
+
+.signup::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+  border-radius: 50%;
+}
+
+.signup::-webkit-scrollbar-track {
+  background: none; /* color of the tracking area */
+  margin: 10px;
+}
+
+.signup::-webkit-scrollbar-thumb {
+  background-color: #222831; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #eeeeee; /* creates padding around scroll thumb */
+}
+
+
