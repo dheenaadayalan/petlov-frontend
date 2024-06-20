@@ -4,7 +4,7 @@ import PetPersonality from "./Personality";
 import PetBehaviors from "./PetBehaviors";
 import { storage } from "../src/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import PetCatorgry from "./PetCatorgry";
 
 import { useFormik } from "formik";
@@ -20,6 +20,12 @@ function AddPets(props) {
   const { currentuser } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is requried"),
+    requirements: Yup.string().required("Requirements is requried"),
+  });
+
+
   //For Images
   const [images, setImages] = useState([]);
   const [upImages, setUpImages] = useState([]);
@@ -27,7 +33,7 @@ function AddPets(props) {
 
   //For Data
   const [personality, setPersonality] = useState([]);
-  const [petBehaviors, setPetBehaviors] = useState([]);
+  const [Petbehavior, setPetBehaviors] = useState([]);
   const [catorgry, setCatorgry] = useState([])
   const picUrl = [];
 
@@ -36,18 +42,22 @@ function AddPets(props) {
     initialValues: {
       name: "",
       personality: personality,
-      behavior: petBehaviors,
+      behavior: Petbehavior,
       requirements: "",
       petPictures: picUrl,
       catorgry:catorgry,
     },
+    validationSchema,
     onSubmit: async (values) => {
-      values.behavior = petBehaviors;
+      values.behavior = Petbehavior;
       values.personality = personality;
       values.petPictures = picUrl;
       values.catorgry = catorgry;
+      if (upImages.length<1 || Petbehavior.length<1 || personality.length<1 ||catorgry.length<1){
 
-      if (upImages == null) return;
+        toast.error('Enter all the values')
+        return
+      }
       for (const property in upImages) {
         if (typeof upImages[property] == "object") {
           const imgRef = ref(
@@ -110,6 +120,9 @@ function AddPets(props) {
           value={formik.values.name}
           onChange={formik.handleChange}
         />
+        <div className="text-danger">
+          <p>{formik.errors.name}</p>
+        </div>
         <div
           className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-h-[40vh] tw-w-[90vw]  md:tw-w-[50vw] tw-border-dotted tw-border-2 tw-border-quaternary tw-rounded-xl"
           onClick={() => document.querySelector(".input-img").click()}
@@ -149,9 +162,21 @@ function AddPets(props) {
             <MdCloudUpload color="white" size={50} />
           )}
         </div>
+        <div className="text-danger">
+          <p>{formik.errors.petPictures}</p>
+        </div>
         <PetPersonality setPersonality={setPersonality} />
+        <div className="text-danger">
+          <p>{formik.errors.personality}</p>
+        </div>
         <PetBehaviors setPetBehaviors={setPetBehaviors} />
+        <div className="text-danger">
+          <p>{}</p>
+        </div>
         <PetCatorgry setCatorgry={setCatorgry}/>
+        <div className="text-danger">
+          <p>{formik.errors.catorgry}</p>
+        </div>
         <textarea
           className="tw-w-[90vw]  md:tw-w-[50vw] tw-rounded-xl"
           placeholder="Your requirements*"
@@ -161,6 +186,9 @@ function AddPets(props) {
           value={formik.values.requirements}
           onChange={formik.handleChange}
         ></textarea>
+        <div className="text-danger">
+          <p>{formik.errors.requirements}</p>
+        </div>
         <button
           type="submit"
           className="btn btn-outline-light tw-text-2xl "

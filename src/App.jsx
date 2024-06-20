@@ -11,6 +11,7 @@ import Profile from '../Pages/Profile'
 import AddPets from '../Components/AddPets'
 import { useState } from 'react'
 import EditPet from '../Pages/EditPet'
+import PrivateRoute from '../Components/PrivateRoute'
 
 function App() {
 const [petId, setPetId] = useState(null)
@@ -20,7 +21,9 @@ const [petId, setPetId] = useState(null)
         <NavBar/>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route element={<PrivateRoute/>}>
           <Route path='/adoption' element={<Adoption/>}/>
+          </Route>
           <Route path='/pet/owners' element={<PetOwners setPetId={setPetId}/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/signin' element={<SignIn/>}/>

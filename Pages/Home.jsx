@@ -24,7 +24,7 @@ function Home(props) {
           </h6>
           {currentuser ? (
             <>
-              <button type="button" className="btn btn-light tw-max-w-sm tw-rounded-lg tw-font-bold tw-text-xl" onClick={()=>navigate('/adoption')}>
+              <button type="button" className="btn btn-light tw-max-w-sm tw-rounded-lg tw-font-bold tw-text-xl tw-text-primary" onClick={()=>navigate('/adoption')}>
                 Find Your Pet
               </button>
             </>
@@ -62,9 +62,12 @@ function Home(props) {
           <h1 className="tw-text-4xl tw-font-semibold tw-text-quaternary">
             Pets
           </h1>
-          <button className="btn tw-text-quaternary hover:tw-bg-quaternary hover:tw-text-primary tw-border-quaternary tw-border-2">
+          <button 
+          onClick={()=>{navigate('/adoption')}}
+          className="btn tw-text-quaternary hover:tw-bg-quaternary hover:tw-text-primary tw-border-quaternary tw-border-2">
             Explore all
           </button>
+
         </div>
         <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-14 tw-items-center tw-justify-center tw-p-6 tw-mt-2">
           <div className=""></div>

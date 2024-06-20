@@ -81,14 +81,14 @@ function PetOwnersHome({setPetId}) {
                           alt="..."
                         />
                         <div className="card-body tw-flex tw-flex-col tw-justify-between">
-                          <h5 className="card-title tw-text-3xl tw-font-bold tw-text-primary">
+                          <h5 className="card-title tw-text-2xl tw-font-bold tw-text-primary">
                             {ele.name}
                           </h5>
                           <div className="tw-flex tw-flex-row tw-justify-start tw-gap-5">
                             <p className="tw-text-lg tw-font-semibold tw-text-primary">
                               Category:
                             </p>
-                            <p className="tw-text-lg tw-font-semibold tw-text-primary">
+                            <p className="tw-text-base tw-font-semibold tw-text-primary">
                               {ele.catorgry[0]}
                             </p>
                           </div>
