@@ -48,8 +48,10 @@ function PetOwners({ setPetId }) {
       {loading ? (
         <>
           <div className="tw-w-full tw-h-[90vh] tw-pt-[35vh] tw-flex tw-flex-row tw-justify-center">
-          <div className=""><i className="fa fa-refresh fa-spin fa-5x fa-fw tw-text-primary"></i>
-          <span className="sr-only">Loading...</span></div>
+            <div className="">
+              <i className="fa fa-refresh fa-spin fa-5x fa-fw tw-text-primary"></i>
+              <span className="sr-only">Loading...</span>
+            </div>
             <h1 className="tw-text-6xl tw-text-primary  tw-text-center">
               Loading...
             </h1>

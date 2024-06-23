@@ -20,11 +20,6 @@ body::-webkit-scrollbar-thumb {
   margin: 20px;
 }
 
-
-
-
-
-
 .signup::-webkit-scrollbar {
   width: 12px; /* width of the entire scrollbar */
   border-radius: 50%;

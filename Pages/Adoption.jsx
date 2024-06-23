@@ -14,12 +14,25 @@ function Adoption(props) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [show, setShow] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState({});
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    
+  };
+  const handleCloseMessage = () => {
+    setShowMessage(false);  
+     
+  };
   const handleShow = (item) => {
     setModalContent(item);
     setShow(true);
+  };
+
+  const handleShowMessage = (item) => {
+    setModalContent(item);
+    setShowMessage(true);
   };
 
   useEffect(() => {
@@ -29,13 +42,13 @@ function Adoption(props) {
   const fetchData = async () => {
     try {
       await axios
-        .get("http://localhost:4000/api/user/petowner/pets/all", {
+        .get("http://localhost:4000/api/user/pets/all", {
           headers: { token: userToken },
         })
         .then((response) => {
           setData(response.data.data);
           setResults(response.data.data);
-          setModalContent(response.data.data[0])
+          setModalContent(response.data.data[0]);
         });
     } catch (error) {
       toast.error(error.message);
@@ -44,7 +57,7 @@ function Adoption(props) {
   };
 
   const fuseOptions = {
-    keys: ["name", "catorgry", "behavior", "personality"], // Adjust according to your data structure
+    keys: ["name", "catorgry", "behavior", "personality", "address"], // Adjust according to your data structure
     threshold: 0.3,
   };
 
@@ -65,10 +78,10 @@ function Adoption(props) {
     <>
       <div
         className={`${
-          results.length > 4 ? "tw-h-full" : "tw-h-full md:tw-h-[90vh]"
+          results.length > 4 ? "tw-h-full" : "tw-h-full lg:tw-h-[90vh]"
         } tw-w-full tw-bg-primary tw-flex tw-flex-col`}
       >
-        <nav className=" navbar navbar-expand-lg tw-bg-transparent tw-border-solid tw-border-primary tw-border-y-2 tw-px-5">
+        <nav className=" navbar navbar-expand-lg tw-bg-transparent tw-border-solid tw-border-primary tw-border-y-2 tw-px-5 tw-pt-8">
           <div className="container-fluid tw-mx-2 sm:tw-mx-10">
             <form className="tw-bg-quaternary tw-rounded-xl">
               <input
@@ -163,15 +176,25 @@ function Adoption(props) {
                       </div>
 
                       <Button
-                        
                         onClick={() => handleShow(ele)}
-                        className="btn tw-text-primary tw-bg-quaternary tw-border-solid tw-border-primary hover:tw-bg-primary"
+                        className="btn  btn-outline-light tw-text-primary tw-bg-quaternary tw-border-solid tw-border-primary hover:tw-bg-primary hover:tw-text-quaternary"
                       >
                         Know More
+                      </Button>
+                      <Button
+                        onClick={() => handleShowMessage(ele)}
+                        className="btn tw-font-bold btn-secondary tw-text-quaternary  tw-bg-primary tw-border-solid tw-border-primary hover:tw-bg-primary"
+                      >
+                        Meet {ele.name}
                       </Button>
                       <KnowMore
                         show={show}
                         handleClose={handleClose}
+                        content={modalContent}
+                      />
+                      <SentMessage
+                        show={showMessage}
+                        handleClose={handleCloseMessage}
                         content={modalContent}
                       />
                       {/* <SentMessage ele={ele}/> */}

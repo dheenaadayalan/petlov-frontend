@@ -1,53 +1,77 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Carousel } from "react-bootstrap";
+import { FaLocationDot } from "react-icons/fa6";
 
 function KnowMore({ show, handleClose, content }) {
-  console.log(content.petPictures);
   return (
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>{content.name}</Modal.Title>
+    <Modal show={show} onHide={handleClose} backdrop="static">
+      <Modal.Header className="" closeButton>
+        <Modal.Title>
+          <div className="tw-flex tw-flex-col tw-gap-1">
+            <h1 className="tw-font-bold tw-text-2xl">{content.name}</h1>
+            <p className="tw-font-semibold tw-flex tw-flex-row tw-align-bottom tw-text-base">
+              <FaLocationDot />
+              {content.address}
+            </p>
+          </div>
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="tw-flex tw-flex-col">
-          <div id="carouselExample" className="carousel slide">
-            <div className="carousel-inner">
-              {content.petPictures.map((ele, index) => {
+        <div className="tw-flex tw-flex-col tw-justify-evenly">
+          <div className="">
+            <Carousel>
+              {content.petPictures.map((ele, i) => {
                 return (
-                  <div className="carousel-item active" key={index}>
+                  <Carousel.Item key={i}>
                     <img
                       src={ele}
-                      className="d-block w-100 tw-h-[40vh]"
-                      alt="..."
+                      alt={`${content.name}'s pics`}
+                      className="tw-h-[30vh] tw-w-full"
                     />
-                  </div>
+                  </Carousel.Item>
                 );
               })}
+            </Carousel>
+          </div>
+          <div className="tw-grid tw-grid-cols-4 tw-gap-4 tw-mt-3">
+            <div className="tw-col-span-1">
+              <p>Behavior</p>
             </div>
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
+            <div className="tw-col-span-3">
+              <ul className="tw-flex tw-flex-wrap hover:tw-cursor-pointer">
+                {content.behavior.map((item) => (
+                  <li
+                    key={item}
+                    className="tw-px-4 tw-py-2 tw-mr-4 tw-rounded-xl tw-bg-primary tw-text-quaternary"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="tw-grid tw-grid-cols-4 tw-gap-4 tw-mt-3">
+            <div className="tw-col-span-1">
+              <p>Personality</p>
+            </div>
+            <div className="tw-col-span-3">
+              <ul className="tw-flex tw-flex-wrap hover:tw-cursor-pointer">
+                {content.personality.map((item) => (
+                  <li
+                    key={item}
+                    className="tw-px-4 tw-py-2 tw-mr-4 tw-rounded-xl tw-bg-primary tw-text-quaternary"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className=" tw-grid tw-grid-cols-4 tw-gap-4 tw-mt-3">
+            <div className="tw-col-span-1">
+              <p>Owners Requirement</p>
+            </div>
+            <div className="tw-col-span-3">{content.requirements}</div>
           </div>
         </div>
       </Modal.Body>

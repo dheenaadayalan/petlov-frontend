@@ -44,15 +44,20 @@ function SignIn(props) {
       await axios
         .post("http://localhost:4000/api/auth/sign-in", values)
         .then((res) => {
-          if (res.data.success == true) {
-            toast.success(res.data.message);
+          if (res.data.success == false){
+            toast.error(res.data.message);
+            dispatch(signInFailure(res.data.message));
+          }
+          if (res.data.success == true) { 
             dispatch(signInSuccess(res.data.result));
+            toast.success(res.data.message);
             localStorage.setItem("Token", res.data.token);
             navigate("/");
           }
         })
         .catch((error) => {
-          toast.error(error.data.message);
+          console.log(error);
+          toast.error(error.data);
           dispatch(signInFailure(error.message));
         });
     },
@@ -60,7 +65,7 @@ function SignIn(props) {
 
   return (
     <>
-      <div className="tw-w-full tw-bg-primary md:tw-h-[90vh] tw-h-full tw-py-5 tw-flex tw-flex-col md:tw-flex-row  tw-gap-4 tw-justify-center">
+      <div className="tw-w-full tw-bg-primary tw-h-[90vh] tw-py-5 tw-flex tw-flex-col md:tw-flex-row  tw-gap-4 tw-justify-center">
         <div className="tw-m-auto md:tw-w-[40%] tw-w-full tw-flex tw-flex-col tw-gap-3">
           <h1 className="tw-text-quaternary tw-font-bold md:tw-text-4xl tw-text-2xl md:tw-leading-normal tw-leading-normal md:tw-text-start tw-text-center">
             <span className="tw-bg-quaternary tw-border-solid tw-border-2 tw-rounded-2xl tw-text-primary tw-p-1 tw-mr-2">
@@ -73,7 +78,7 @@ function SignIn(props) {
             Make a life-changing difference for a deserving animal. Sign up to
             browse adoptable pets and find your new best friend.
           </h6>
-          <div className="tw-text-start ">
+          <div className="md:tw-text-start tw-text-center ">
             <h3 className="tw-text-quaternary tw-underline tw-underline-offset-2">
               Don't have any account?{" "}
               <span className="tw-font-bold tw-bg-quaternary tw-border-solid tw-border-2 tw-rounded-2xl tw-text-primary tw-p-1 tw-mr-2">
@@ -83,7 +88,7 @@ function SignIn(props) {
           </div>
         </div>
         
-        <div className="card tw-w-[90%] md:tw-w-[30%] tw-h-[90%] tw-m-auto tw-overflow-auto tw-p-5 tw-rounded-2xl signup tw-text-start">
+        <div className="card tw-w-[90%] md:tw-w-[30%] tw-h-[60%] md:tw-h-[90%] tw-m-auto tw-overflow-auto tw-p-5 tw-rounded-2xl signup tw-text-start">
           <img
             src={logo}
             className="card-img-top tw-h-[30%] tw-w-[40%] tw-mx-auto"

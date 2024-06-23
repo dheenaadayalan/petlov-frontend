@@ -85,7 +85,7 @@ const SingUpPetOwner = () => {
               </div>
               <div className="tw-mt-3">
                 <label className="form-label">
-                  Address <span className="tw-text-red-700">*</span>
+                  City <span className="tw-text-red-700">*</span>
                 </label>
                 <input
                   type="text"

@@ -6,7 +6,7 @@ import { storage } from "../src/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useSelector } from "react-redux";
 import PetCatorgry from "../Components/PetCatorgry";
-
+import {v4} from "uuid";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -81,9 +81,11 @@ function EditPet({ petId }) {
       values.personality = personality;
       values.catorgry = catorgry;
       values.isAdopted = isAdopted;
+
       if (upImages.length < 1) {
         values.petPictures = oldPic;
       } else {
+        
         for (const property in upImages) {
           if (typeof upImages[property] == "object") {
             const imgRef = ref(
@@ -114,7 +116,6 @@ function EditPet({ petId }) {
           }
         }
       }
-
       await axios
         .post(
           `http://localhost:4000/api/user/petowner/pets/update/${petId}`,
@@ -200,7 +201,7 @@ function EditPet({ petId }) {
                 const newImages = Array.from(files).map((file) =>
                   URL.createObjectURL(file)
                 );
-                setUpImages(files);
+                setUpImages([...files, files]);
                 setImages([...images, ...newImages]);
               }
             }}
@@ -226,12 +227,19 @@ function EditPet({ petId }) {
         </div>
         <p className="tw-text-2xl tw-text-quaternary">Old Photos</p>
 
-        <div id="carouselExample" className="carousel slide tw-w-[90vw]  md:tw-w-[50vw]">
+        <div
+          id="carouselExample"
+          className="carousel slide tw-w-[90vw]  md:tw-w-[50vw]"
+        >
           <div className="tw-w-full ">
             {oldPic.map((ele, index) => {
               return (
                 <div key={index} className="carousel-item active">
-                  <img src={ele} className="d-block tw-h-[35vh] tw-mx-auto" alt="..." />
+                  <img
+                    src={ele}
+                    className="d-block tw-h-[35vh] tw-mx-auto"
+                    alt="..."
+                  />
                 </div>
               );
             })}

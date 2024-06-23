@@ -5,16 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import UserEdit from "../Components/userEdit";
 
-
 function Profile(props) {
   const navigate = useNavigate();
   const { currentuser } = useSelector((state) => state.user);
   const [isPetOwner, setIsPetOwner] = useState(false);
   const userToken = localStorage.getItem("Token");
   const [petOwnerData, setPetOwnerData] = useState(null);
-  const [img, setImg] = useState(null);
-
-  useEffect(() => { 
+  const [img, setImg] = useState([]);
+  const imgU = [];
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -47,10 +46,12 @@ function Profile(props) {
                 <input
                   type="file"
                   id="file"
+                  accept="image/*"
+                  className="input-img"
                   style={{ display: "none" }}
                   onChange={async (e) => {
-                    setImg(e.target.files[0]);
-                    console.log(img);
+                    imgU.push(e.target.files[0]);
+                    setImg(imgU);
                   }}
                 />
                 <button
@@ -88,13 +89,26 @@ function Profile(props) {
         <div className="card-body tw-py-[30vh] tw-align-middle">
           {isPetOwner ? (
             <>
-              <div className="card tw-col-span-2 tw-bg-quaternary tw-shadow-2xl tw-w-[65%] tw-mx-auto">
-                <h1 className="card-title">{petOwnerData.address}</h1>
-                <h1 className="card-title">{petOwnerData.pets.length}</h1>
-                <h1 className="card-title">
+              {/* <div className="card tw-col-span-2 tw-bg-quaternary tw-shadow-2xl tw-w-[65%] tw-mx-auto"> */}
+                <div className="tw-flex tw-flex-row">
+                  <h1 className="tw-w-2/5 tw-text-lg tw-italic">Location:</h1>
+                  <h1 className="tw-w-3/5 tw-text-lg tw-font-semibold">
+                    {petOwnerData.address}
+                  </h1>
+                </div>
+                <div className="tw-flex tw-flex-row">
+                  <h1 className="tw-w-2/5 tw-text-lg tw-italic">Number of pets:</h1>
+                  <h1 className="tw-w-3/5 tw-text-lg tw-font-semibold">
+                    {petOwnerData.pets.length}
+                  </h1>
+                </div>
+                <div className="tw-flex tw-flex-row">
+                  <h1 className="tw-w-2/5 tw-text-lg tw-italic">Member from:</h1>
+                  <h1 className="tw-w-3/5 tw-text-lg tw-font-semibold">
                   {petOwnerData.createdAt.slice(0, 10)}
-                </h1>
-              </div>
+                  </h1>
+                </div>
+              {/* </div> */}
             </>
           ) : (
             <>
