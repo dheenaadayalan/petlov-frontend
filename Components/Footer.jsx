@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../assets/icons-pet.png";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Footer() {
   return (
@@ -18,9 +19,15 @@ function Footer() {
             </h1>
           </div>
           <div className="tw-flex tw-flex-row tw-justify-evenly hidden md:tw-relative">
-            <span><Link to='/'>Home</Link></span>
-            <span><Link to='/adoption'>Adoption</Link></span>
-            <span><Link to='/pet/owners'>PetOwner</Link></span>
+            <span>
+              <Link to="/">Home</Link>
+            </span>
+            <span>
+              <Link to="/adoption">Adoption</Link>
+            </span>
+            <span>
+              <Link to="/pet/owners">PetOwner</Link>
+            </span>
           </div>
           <h1 className="tw-text-primary">
             Copyright © {new Date().getFullYear()} PetLov LLP.
@@ -38,11 +45,19 @@ function Footer() {
                 </label>
                 <input
                   type="email"
-                  className="form-control"
+                  className="form-control tw-rounded-xl"
                   name="email"
                   placeholder="E-Mail"
                 />
-                <button className="btn btn-outline-light tw-mt-2">Submit</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    toast.success("Registered Successfully");
+                  }}
+                  className="btn btn-outline-light tw-mt-2"
+                >
+                  Submit
+                </button>
               </form>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import thank from "../assets/thank.jpg";
+import thank from "../assets/thank.png";
 import Footer from "../Components/Footer";
 import { useSelector } from "react-redux";
 import axios from "axios";

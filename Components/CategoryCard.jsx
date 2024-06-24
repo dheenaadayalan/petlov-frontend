@@ -2,7 +2,7 @@ import React from "react";
 
 function CategoryCard({img, title}) {
   return (
-    <div className="card tw-w-full md:tw-w-1/4 tw-h-[26rem] tw-bg-primary tw-p-4">
+    <div className="card tw-w-full md:tw-w-1/4 tw-h-[24rem] tw-bg-primary tw-p-4 tw-shadow-xl">
       <img
         src={img}
         className="card-img-top tw-h-[70%] tw-w-[75%] tw-mx-auto"

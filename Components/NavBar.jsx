@@ -7,7 +7,7 @@ import { signOutSuccess } from "../Redux/userSlice";
 function NavBar(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const activeClassName = 'tw-border-b-2  tw-border-primary';
+  const activeClassName = 'tw-border-solid tw-border-2 tw-rounded-2xl tw-bg-primary tw-text-quaternary tw-font-semibold';
   const { currentuser } = useSelector((state) => state.user);
 
   const handleSignout = () => {
@@ -43,14 +43,14 @@ function NavBar(props) {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
+          </button>  
           <div className="collapse navbar-collapse lg:tw-ml-[55vw]" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <NavLink
                   to="/"
                   activeclassname="active"
-                  className={({ isActive }) => `p-2 ${isActive ? activeClassName : 'border-transparent'}  tw-text-primary hover:tw-text-primary`}
+                  className={({ isActive }) => `p-2 ${isActive ? activeClassName : 'border-transparent'}  tw-text-primary `}
                 >
                   Home
                 </NavLink>
@@ -59,7 +59,7 @@ function NavBar(props) {
                 <NavLink
                   to="/adoption"
                   activeclassname="active"
-                  className={({ isActive }) => `p-2 ${isActive ? activeClassName : 'border-transparent'}  tw-text-primary hover:tw-text-primary`}
+                  className={({ isActive }) => `p-2 ${isActive ? activeClassName : 'border-transparent'}  tw-text-primary `}
                 >
                   Adoption
                 </NavLink>
@@ -68,7 +68,7 @@ function NavBar(props) {
                 <NavLink
                   to="/pet/owners"
                   activeclassname="active"
-                  className={({ isActive }) => `p-2 ${isActive ? activeClassName : 'border-transparent'}  tw-text-primary hover:tw-text-primary`}
+                  className={({ isActive }) => `p-2 ${isActive ? activeClassName : 'border-transparent'}  tw-text-primary`}
                 >
                   Pet Owners
                 </NavLink>
@@ -99,9 +99,9 @@ function NavBar(props) {
                     <li>
                     <a
                         className="dropdown-item tw-cursor-pointer hover:tw-bg-primary hover:tw-text-quaternary"
-                        onClick={() => navigate("/signup")}
+                        onClick={() => navigate("/pet/owners")}
                       >
-                        Create a account
+                        Become Pet Owner?
                       </a>
                     </li>
                     <li>

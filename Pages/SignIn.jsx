@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/3771.jpg";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
@@ -9,10 +9,12 @@ import YupPassword from "yup-password";
 import { Link, useNavigate } from "react-router-dom";
 import { signInFailure, signInStart, signInSuccess } from "../Redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 
 YupPassword(Yup);
 
 function SignIn(props) {
+  const [see, setSee] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error: errorMessage } = useSelector((state) => state.user);
@@ -44,11 +46,11 @@ function SignIn(props) {
       await axios
         .post("http://localhost:4000/api/auth/sign-in", values)
         .then((res) => {
-          if (res.data.success == false){
+          if (res.data.success == false) {
             toast.error(res.data.message);
             dispatch(signInFailure(res.data.message));
           }
-          if (res.data.success == true) { 
+          if (res.data.success == true) {
             dispatch(signInSuccess(res.data.result));
             toast.success(res.data.message);
             localStorage.setItem("Token", res.data.token);
@@ -62,6 +64,17 @@ function SignIn(props) {
         });
     },
   });
+
+  function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+      setSee(false);
+    } else {
+      x.type = "password";
+      setSee(true);
+    }
+  }
 
   return (
     <>
@@ -87,8 +100,8 @@ function SignIn(props) {
             </h3>
           </div>
         </div>
-        
-        <div className="card tw-w-[90%] md:tw-w-[30%] tw-h-[60%] md:tw-h-[90%] tw-m-auto tw-overflow-auto tw-p-5 tw-rounded-2xl signup tw-text-start">
+
+        <div className="card tw-w-[90%] md:tw-w-[30%] tw-h-[70%] md:tw-h-[90%] tw-m-auto tw-overflow-auto tw-p-5 tw-rounded-2xl signup tw-text-start">
           <img
             src={logo}
             className="card-img-top tw-h-[30%] tw-w-[40%] tw-mx-auto"
@@ -105,7 +118,7 @@ function SignIn(props) {
                 </label>
                 <input
                   type="email"
-                  className="form-control"
+                  className="form-control tw-rounded-xl"
                   name="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
@@ -118,13 +131,19 @@ function SignIn(props) {
                 <label className="form-label">
                   Password <span className="tw-text-red-700">*</span>
                 </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                />
+                <div className="tw-flex tw-flex-row form-control tw-border-gray-600 tw-rounded-xl tw-p-0 tw-m-0">
+                  <input
+                    id="myInput"
+                    type="password"
+                    className="form-contrl tw-border-none tw-w-[94%] tw-outline-none tw-rounded-xl"
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                  />
+                  <div onClick={myFunction} className="tw-my-auto tw-h-full hover:tw-cursor-pointer">
+                    {see ? <FaRegEye /> : <FaEyeSlash />}
+                  </div>
+                </div>
               </div>
               <div className="text-danger">
                 <p>{formik.errors.password}</p>
@@ -140,7 +159,6 @@ function SignIn(props) {
               </div>
             </form>
           </div>
-          
         </div>
       </div>
     </>

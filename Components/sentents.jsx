@@ -31,7 +31,7 @@ function Sentents(props) {
           <li
             key={index}
             className={`tw-transition-opacity tw-text-quaternary tw-duration-1000 ${
-              index === currentSentenceIndex ? "tw-opacity-100 tw-font-bold md:tw-text-3xl tw-text-xl tw-italic" : "tw-opacity-50"
+              index === currentSentenceIndex ? "tw-opacity-100 tw-font-bold md:tw-text-2xl tw-text-xl tw-italic" : "tw-opacity-50"
             }`}
           >
             {sentence}

@@ -72,11 +72,11 @@ function PetOwnersHome({ setPetId }) {
       >
         <h1 className="tw-text-4xl tw-text-quaternary">Manage your pets</h1>
         <div className="tw-py-10 tw-flex tw-flex-col tw-justify-evenly tw-gap-5">
-          <h1 className="tw-text-2xl tw-text-quaternary">Messages</h1>
+          <h1 className="tw-text-2xl tw-text-quaternary">Adoption Request</h1>
           <div className="card tw-mx-5 tw-h-[40vh]">
             {messagesData.length > 0 ? (
               <>
-                <div className="card tw-flex tw-flex-row tw-h-[40vh]">
+                <div className="card tw-flex tw-flex-row tw-h-[40vh] tw-gap-2 tw-p-1">
                   <div className="card tw-w-1/4 tw-overflow-auto tw-border-r-2 tw-border-primary tw-m-0 tw-p-0">
                     {messagesData.map((ele, i) => {
                       return (
@@ -95,8 +95,8 @@ function PetOwnersHome({ setPetId }) {
                       );
                     })}
                   </div>
-                  <div className="tw-p-3 tw-overflow-auto tw-w-3/4">
-                  <div className="tw-flex tw-flex-row">
+                  <div className="tw-p-3 tw-overflow-auto tw-w-3/4 tw-border-primary tw-border-2 tw-rounded-xl">
+                    <div className="tw-flex tw-flex-row">
                       <h1 className="tw-w-1/5 tw-text-lg tw-italic">
                         Pet Willing to adopt:
                       </h1>
@@ -171,14 +171,14 @@ function PetOwnersHome({ setPetId }) {
           </div>
           {Object.keys(petsData).length > 0 ? (
             <>
-              <div className="container">
-                <div className="row g-4 justify-content-evenly">
+             
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 tw-mt-5 tw-mx-auto tw-gap-10">
                   {/* card tw-w-[16.5rem] tw-h-[40vh] */}
                   {petsData.map((ele, index) => {
                     return (
                       <div
                         key={index}
-                        className="card tw-w-[16.5rem] tw-h-[50vh] tw-pt-2 "
+                        className="card tw-w-[16.5rem] tw-h-[50vh] "
                       >
                         <img
                           src={ele.petPictures[0]}
@@ -211,7 +211,7 @@ function PetOwnersHome({ setPetId }) {
                     );
                   })}
                 </div>
-              </div>
+              
             </>
           ) : (
             <>

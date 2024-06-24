@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,10 +7,12 @@ import * as Yup from "yup";
 import YupPassword from "yup-password";
 import { signInFailure, signInStart, signInSuccess } from "../Redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 
 YupPassword(Yup);
 
 function UserEdit(props) {
+  const [see, setSee] = useState(false);
   const { currentuser } = useSelector((state) => state.user);
   const userToken = localStorage.getItem("Token");
   const dispatch = useDispatch();
@@ -48,7 +50,9 @@ function UserEdit(props) {
           if (res.data.success == true) {
             toast.success(res.data.message);
             dispatch(signInSuccess(res.data.data));
-            document.getElementById('closeit').setAttribute("data-bs-dismiss","modal")
+            document
+              .getElementById("closeit")
+              .setAttribute("data-bs-dismiss", "modal");
           }
         })
         .catch((error) => {
@@ -57,6 +61,16 @@ function UserEdit(props) {
         });
     },
   });
+  function myFunction() {
+    var x = document.getElementById("myInput2");
+    if (x.type === "password") {
+      x.type = "text";
+      setSee(false);
+    } else {
+      x.type = "password";
+      setSee(true);
+    }
+  }
   return (
     <div className="tw-ml-auto">
       <button
@@ -74,7 +88,7 @@ function UserEdit(props) {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog tw-text-start">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
@@ -95,7 +109,7 @@ function UserEdit(props) {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control tw-rounded-xl"
                     name="username"
                     value={formik.values.username}
                     onChange={formik.handleChange}
@@ -110,7 +124,7 @@ function UserEdit(props) {
                   </label>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control tw-rounded-xl"
                     name="email"
                     value={formik.values.email}
                     onChange={formik.handleChange}
@@ -123,14 +137,22 @@ function UserEdit(props) {
                   <label className="form-label">
                     Password <span className="tw-text-red-700">*</span>
                   </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    placeholder=""
-                  />
+                  <div className="tw-flex tw-flex-row form-control tw-border-gray-600 tw-rounded-xl tw-p-0 tw-m-0">
+                    <input
+                      id="myInput2"
+                      type="password"
+                      className="form-contrl tw-border-none tw-w-[94%] tw-outline-none tw-rounded-xl"
+                      name="password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                    />
+                    <div
+                      onClick={myFunction}
+                      className="tw-my-auto tw-h-full hover:tw-cursor-pointer"
+                    >
+                      {see ? <FaRegEye /> : <FaEyeSlash />}
+                    </div>
+                  </div>
                 </div>
                 <div className="text-danger">
                   <p>{formik.errors.password}</p>

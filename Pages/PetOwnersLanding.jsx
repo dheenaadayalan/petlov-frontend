@@ -7,15 +7,15 @@ function PetOwnersLanding(props) {
   const navigate = useNavigate();
   return (
     <>
-      <div className="tw-w-full tw-h-full tw-bg-primary  tw-pt-10">
-        <h1 className="md:tw-text-5xl tw-text-3xl tw-text-quaternary tw-font-bold tw-text-center md:tw-px-[20%]">
+      <div className="tw-w-full tw-h-full md:tw-h-[90vh] tw-bg-primary  tw-pt-10">
+        <h1 className="md:tw-text-4xl tw-text-3xl tw-text-quaternary tw-font-bold tw-text-center md:tw-px-[20%]">
           Don't Let Your Pet Feel Unwanted: Find Them a Perfect Match
         </h1>
         <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-center tw-p-10 tw-align-middle tw-gap-10">
           <img
             src={petPic}
             alt="pic of all pet"
-            className="md:tw-w-1/2 tw-h-1/3"
+            className="md:tw-w-[40vw] md:tw-h-[60vh] tw-h-[40vh]"
           />
           <div className="card tw-bg-quaternary tw-h-full md:tw-h-[30vh] tw-py-10 md:tw-p-0 md:tw-m-auto md:tw-w-1/3">
             <div className="tw-text-center">

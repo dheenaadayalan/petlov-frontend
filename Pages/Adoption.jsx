@@ -7,6 +7,7 @@ import KnowMore from "../Components/KnowMore";
 import SentMessage from "../Components/SentMessage";
 import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { catorgry, personality, Behaviors } from "../assets/data";
 
 function Adoption(props) {
   const userToken = localStorage.getItem("Token");
@@ -19,11 +20,9 @@ function Adoption(props) {
 
   const handleClose = () => {
     setShow(false);
-    
   };
   const handleCloseMessage = () => {
-    setShowMessage(false);  
-     
+    setShowMessage(false);
   };
   const handleShow = (item) => {
     setModalContent(item);
@@ -74,136 +73,162 @@ function Adoption(props) {
     }
   };
 
+  const handleFilter = (key, filterValue) => {
+    const filteredResults = results.filter((data) => {
+      if (Array.isArray(data[key])) {
+        return data[key].includes(filterValue);
+      }
+      return data[key] === filterValue;
+    });
+    if (filteredResults.length < 1) {
+      return toast.error(`No pet found as ${filterValue}`);
+    }
+    setResults(filteredResults);
+    console.log(results);
+  };
+
   return (
     <>
       <div
         className={`${
           results.length > 4 ? "tw-h-full" : "tw-h-full lg:tw-h-[90vh]"
-        } tw-w-full tw-bg-primary tw-flex tw-flex-col`}
+        } tw-w-full tw-bg-primary tw-flex tw-flex-col tw-mx-auto`}
       >
-        <nav className=" navbar navbar-expand-lg tw-bg-transparent tw-border-solid tw-border-primary tw-border-y-2 tw-px-5 tw-pt-8">
-          <div className="container-fluid tw-mx-2 sm:tw-mx-10">
-            <form className="tw-bg-quaternary tw-rounded-xl">
-              <input
-                type="text"
-                placeholder="Search"
-                className="md:tw-w-[40vw] tw-bg-quaternary tw-rounded-xl tw-border-r-0 tw-w-[80vw]"
-                onChange={handleSearch}
-              />
-            </form>
+        <div className="tw-mx-auto tw-flex lg:tw-flex-row tw-flex-col tw-justify-between tw-bg-transparent tw-pt-8">
+          <form className="tw-bg-quaternary tw-rounded-xl ">
+            <input
+              type="text"
+              placeholder="Search"
+              className="md:tw-w-[70vw] lg:tw-w-[60vw] tw-bg-quaternary tw-rounded-xl tw-border-r-0 tw-w-[80vw]"
+              onChange={handleSearch}
+            />
+          </form>
 
-            <div className="btn-group" role="group">
-              <button
-                type="button"
-                className="btn tw-text-quaternary dropdown-toggle hover:tw-text-quaternary hover:tw-border-none tw-border-none"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Category
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item">Dropdown link</a>
-                </li>
-                <li>
-                  <a className="dropdown-item">Dropdown link</a>
-                </li>
-              </ul>
-            </div>
-            <div className="btn-group" role="group">
-              <button
-                type="button"
-                className="btn tw-text-quaternary dropdown-toggle hover:tw-text-quaternary hover:tw-border-none tw-border-none"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Personality
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item">Dropdown link</a>
-                </li>
-                <li>
-                  <a className="dropdown-item">Dropdown link</a>
-                </li>
-              </ul>
-            </div>
-            <div className="btn-group" role="group">
-              <button
-                type="button"
-                className="btn tw-text-quaternary dropdown-toggle hover:tw-text-quaternary hover:tw-border-none tw-border-none"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Behavior
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item">Dropdown link</a>
-                </li>
-                <li>
-                  <a className="dropdown-item">Dropdown link</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div className="tw-w-full tw-mt-5">
-          <div className="container">
-            <div className="row g-4 justify-content-evenly">
-              {results.map((ele, index) => {
+          <div className="tw-pl-3 tw-flex lg:tw-flex-row tw-flex-col tw-gap-2 lg:tw-pt-0 tw-pt-4">
+          <div className="btn-group" role="group">
+            <button
+              type="button"
+              className="btn btn-outline-light dropdown-toggle tw-rounded-2xl"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Category
+            </button>
+            <ul className="dropdown-menu">
+              {catorgry.map((ele, i) => {
                 return (
-                  <div
-                    key={index}
-                    className="card tw-w-[16.5rem] tw-h-[57vh] tw-pt-2 "
-                  >
-                    <img
-                      src={ele.petPictures[0]}
-                      className="card-img-top tw-h-[25vh]"
-                      alt="..."
-                    />
-                    <div className="card-body tw-flex tw-flex-col tw-justify-between">
-                      <h5 className="card-title tw-text-3xl tw-font-bold tw-text-primary">
-                        {ele.name}
-                      </h5>
-                      <div className="tw-flex tw-flex-row tw-justify-start tw-gap-5">
-                        <p className="tw-text-lg tw-font-semibold tw-text-primary">
-                          Category:
-                        </p>
-                        <p className="tw-text-lg tw-font-semibold tw-text-primary">
-                          {ele.catorgry[0]}
-                        </p>
-                      </div>
-
-                      <Button
-                        onClick={() => handleShow(ele)}
-                        className="btn  btn-outline-light tw-text-primary tw-bg-quaternary tw-border-solid tw-border-primary hover:tw-bg-primary hover:tw-text-quaternary"
-                      >
-                        Know More
-                      </Button>
-                      <Button
-                        onClick={() => handleShowMessage(ele)}
-                        className="btn tw-font-bold btn-secondary tw-text-quaternary  tw-bg-primary tw-border-solid tw-border-primary hover:tw-bg-primary"
-                      >
-                        Meet {ele.name}
-                      </Button>
-                      <KnowMore
-                        show={show}
-                        handleClose={handleClose}
-                        content={modalContent}
-                      />
-                      <SentMessage
-                        show={showMessage}
-                        handleClose={handleCloseMessage}
-                        content={modalContent}
-                      />
-                      {/* <SentMessage ele={ele}/> */}
-                    </div>
-                  </div>
+                  <li key={i}>
+                    <a
+                      onClick={() => handleFilter("catorgry", ele)}
+                      className="dropdown-item hover:tw-cursor-pointer hover:tw-font-semibold btn"
+                    >
+                      <p className="tw-text-primary">{ele}</p>
+                    </a>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
+          <div className="btn-group" role="group">
+            <button
+              type="button"
+              className="btn btn-outline-light dropdown-toggle tw-rounded-2xl"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Personality
+            </button>
+            <ul className="dropdown-menu">
+              {personality.map((ele, i) => {
+                return (
+                  <li key={i}>
+                    <a
+                      onClick={() => handleFilter("personality", ele)}
+                      className="dropdown-item hover:tw-cursor-pointer hover:tw-font-semibold"
+                    >
+                      <p className="tw-text-primary">{ele}</p>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="btn-group" role="group">
+            <button
+              type="button"
+              className="btn btn-outline-light dropdown-toggle tw-rounded-2xl"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Behavior
+            </button>
+            <ul className="dropdown-menu">
+              {Behaviors.map((ele, i) => {
+                return (
+                  <li key={i}>
+                    <a
+                      onClick={() => handleFilter("behavior", ele)}
+                      className="dropdown-item hover:tw-cursor-pointer hover:tw-font-semibold"
+                    >
+                      <p className="tw-text-primary">{ele}</p>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          </div>
+        </div>
+
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 tw-mt-5 tw-mx-auto tw-gap-10">
+          {results.map((ele, index) => {
+            return (
+              <div key={index} className="card tw-w-[16.5rem] tw-h-[56vh]  ">
+                <img
+                  src={ele.petPictures[0]}
+                  className="card-img-top tw-h-[25vh]"
+                  alt="..."
+                />
+                <div className="card-body tw-flex tw-flex-col tw-justify-between">
+                  <h5 className="card-title tw-text-3xl tw-font-bold tw-text-primary">
+                    {ele.name}
+                  </h5>
+                  <div className="tw-flex tw-flex-row tw-justify-start tw-gap-5">
+                    <p className="tw-text-lg tw-font-semibold tw-text-primary">
+                      Category:
+                    </p>
+                    <p className="tw-text-lg tw-font-semibold tw-text-primary">
+                      {ele.catorgry[0]}
+                    </p>
+                  </div>
+
+                  <Button
+                    onClick={() => handleShow(ele)}
+                    className="btn  btn-outline-light tw-text-primary tw-bg-quaternary tw-border-solid tw-border-primary hover:tw-bg-primary hover:tw-text-quaternary"
+                  >
+                    Know More
+                  </Button>
+                  <Button
+                    onClick={() => handleShowMessage(ele)}
+                    className="btn tw-font-bold btn-secondary tw-text-quaternary  tw-bg-primary tw-border-solid tw-border-primary hover:tw-bg-primary"
+                  >
+                    Meet {ele.name}
+                  </Button>
+                  <KnowMore
+                    show={show}
+                    handleClose={handleClose}
+                    content={modalContent}
+                  />
+                  <SentMessage
+                    show={showMessage}
+                    handleClose={handleCloseMessage}
+                    content={modalContent}
+                  />
+                  {/* <SentMessage ele={ele}/> */}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
