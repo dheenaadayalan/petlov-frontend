@@ -24,9 +24,7 @@ function Home(props) {
       await axios
         .get("http://localhost:4000/api/user/pets/home/all")
         .then((response) => {
-          console.log("its");
           setResults(response.data.data);
-          console.log(results);
           setLoaded(false);
         });
     } catch (error) {
@@ -42,7 +40,7 @@ function Home(props) {
           <h1 className="tw-text-4xl tw-text-quaternary tw-font-bold tw-text-center md:tw-text-start">
             Find Your Furever Friend: Adopt a Loving Pet Today!
           </h1>
-          <h6 className="tw-text-lg tw-text-quaternary tw-text-start">
+          <h6 className="tw-text-lg tw-text-quaternary tw-text-center md:tw-text-start">
             Looking for love on four legs? Find your perfect match here!
           </h6>
           {currentuser ? (
@@ -85,7 +83,7 @@ function Home(props) {
               <h1 className="tw-text-9xl tw-mx-auto">
                 <GoVerified />
               </h1>
-              <h1 className="tw-text-2xl tw-font-bold tw-mx-auto tw-text-center tw-mt-5">
+              <h1 className="md:tw-text-2xl tw-text-xl tw-font-bold tw-mx-auto tw-text-center tw-mt-5">
                 Maximum Exposure
               </h1>
               <h1 className="tw-text-sm tw-mx-auto tw-text-center">
@@ -97,7 +95,7 @@ function Home(props) {
               <h1 className="tw-text-9xl tw-mx-auto">
                 <FaRegHandshake />
               </h1>
-              <h1 className="tw-text-2xl tw-font-bold tw-mx-auto tw-text-center tw-mt-5">
+              <h1 className="md:tw-text-2xl tw-text-xl tw-font-bold tw-mx-auto tw-text-center tw-mt-5">
                 Find Responsible Adopters
               </h1>
               <h1 className="tw-text-sm tw-mx-auto tw-text-center">
@@ -109,7 +107,7 @@ function Home(props) {
               <h1 className="tw-text-9xl tw-mx-auto">
                 <RiSecurePaymentLine />
               </h1>
-              <h1 className="tw-text-2xl tw-font-bold tw-mx-auto tw-text-center tw-mt-5">
+              <h1 className="md:tw-text-2xl tw-text-xl tw-font-bold tw-mx-auto tw-text-center tw-mt-5">
                 Safe and Secure
               </h1>
               <h1 className="tw-text-sm tw-mx-auto tw-text-center">
