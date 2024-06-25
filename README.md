@@ -48,4 +48,4 @@ If you have any questions or feedback, please reach out:
 - **Project Maintainer**: Dheenadayalan D
 - **Email**: [dheenadayalan.work@gmail.com](mailto:dheenadayalan.work@gmail.com)
 - **GitHub**: [dheenadayalann33](https://github.com/dheenadayalann33)
-- **Linkedin**: [dheenadayalan](https://www.linkedin.com/in/dheena-dayalan-b8829220b/)
+- **Linkedin**: [dheenadayalan](www.linkedin.com/in/dheenadayalann)
