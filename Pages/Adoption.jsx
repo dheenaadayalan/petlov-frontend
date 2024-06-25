@@ -42,7 +42,7 @@ function Adoption(props) {
   const fetchData = async () => {
     try {
       await axios
-        .get("http://localhost:4000/api/user/pets/all", {
+        .get("https://petlov-backend.onrender.com/api/user/pets/all", {
           headers: { token: userToken },
         })
         .then((response) => {
@@ -197,7 +197,9 @@ function Adoption(props) {
                 return (
                   <div
                     key={index}
-                    className="card tw-w-[16.5rem] tw-h-[56vh]  "
+                    className={`card tw-w-[16.5rem] tw-h-[56vh] ${
+                      ele.isAdopted ? "tw-opacity-80" : "tw-opacity-100"
+                    }`}
                   >
                     <img
                       src={ele.petPictures[0]}
@@ -218,13 +220,29 @@ function Adoption(props) {
                       </div>
 
                       <Button
-                        onClick={() => handleShow(ele)}
+                        onClick={() => {
+                          if (ele.isAdopted == true) {
+                            toast.dark(
+                              "Sorry! The pet is already been adopted."
+                            );
+                          } else {
+                            handleShow(ele);
+                          }
+                        }}
                         className="btn  btn-outline-light tw-text-primary tw-bg-quaternary tw-border-solid tw-border-primary hover:tw-bg-primary hover:tw-text-quaternary"
                       >
                         Know More
                       </Button>
                       <Button
-                        onClick={() => handleShowMessage(ele)}
+                        onClick={() => {
+                          if (ele.isAdopted == true) {
+                            toast.dark(
+                              "Sorry! The pet is already been adopted."
+                            );
+                          } else {
+                            handleShowMessage(ele);
+                          }
+                        }}
                         className="btn tw-font-bold btn-secondary tw-text-quaternary  tw-bg-primary tw-border-solid tw-border-primary hover:tw-bg-primary"
                       >
                         Meet {ele.name}

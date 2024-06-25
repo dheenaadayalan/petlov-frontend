@@ -21,7 +21,7 @@ function FeedBack(props) {
       userId: currentuser._id,
       feedback: feedback,
     };
-    await axios.post("http://localhost:4000/api/user/feedback", requestData, {
+    await axios.post("https://petlov-backend.onrender.com/api/user/feedback", requestData, {
       headers: { token: userToken },
     })
     .then((res)=>{

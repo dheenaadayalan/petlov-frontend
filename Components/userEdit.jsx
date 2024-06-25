@@ -43,7 +43,7 @@ function UserEdit(props) {
       console.log(values);
       dispatch(signInStart());
       await axios
-        .post("http://localhost:4000/api/auth/update", values, {
+        .post("https://petlov-backend.onrender.com/api/auth/update", values, {
           headers: { token: userToken },
         })
         .then((res) => {

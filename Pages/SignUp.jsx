@@ -46,7 +46,7 @@ function SignUp(props) {
     onSubmit: async (values) => {
       dispatch(signInStart());
       await axios
-        .post("http://localhost:4000/api/auth/sign-up", values)
+        .post("https://petlov-backend.onrender.com/api/auth/sign-up", values)
         .then((res) => {
           if (res.data.success == true) {
             toast.success(res.data.message);

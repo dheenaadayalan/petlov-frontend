@@ -25,7 +25,7 @@ function PetOwners({ setPetId }) {
 
   const fetchState = async () => {
     await axios
-      .get("http://localhost:4000/api/user/petowner", {
+      .get("https://petlov-backend.onrender.com/api/user/petowner", {
         headers: { token: userToken },
       })
       .then((res) => {

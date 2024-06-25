@@ -89,7 +89,7 @@ function AddPets(props) {
         }
       }
       await axios
-      .post('http://localhost:4000/api/user/petowner/pets/add',values,{
+      .post('https://petlov-backend.onrender.com/api/user/petowner/pets/add',values,{
         headers: { token: userToken },
       })
       .then((res)=>{

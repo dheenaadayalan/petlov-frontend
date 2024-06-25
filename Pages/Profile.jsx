@@ -26,7 +26,7 @@ function Profile(props) {
 
   const fetchData = async () => {
     await axios
-      .get("http://localhost:4000/api/user/profile/petowner", {
+      .get("https://petlov-backend.onrender.com/api/user/profile/petowner", {
         headers: { token: userToken },
       })
       .then((res) => {
@@ -88,7 +88,7 @@ function Profile(props) {
                     console.log(newPic);
                     await axios
                       .post(
-                        "http://localhost:4000/api/user/update/profile",
+                        "https://petlov-backend.onrender.com/api/user/update/profile",
                         newPic,
                         {
                           headers: { token: userToken },

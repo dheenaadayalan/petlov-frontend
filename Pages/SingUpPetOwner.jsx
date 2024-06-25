@@ -31,7 +31,7 @@ const SingUpPetOwner = () => {
     onSubmit: async (values)=>{
       dispatch(signInStart());
       await axios
-      .post('http://localhost:4000/api/user/petowner/signup', values,{
+      .post('https://petlov-backend.onrender.com/api/user/petowner/signup', values,{
         headers: { token: userToken },
       } )
       .then((res)=>{

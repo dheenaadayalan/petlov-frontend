@@ -22,7 +22,7 @@ function Home(props) {
   const fetchData = async () => {
     try {
       await axios
-        .get("http://localhost:4000/api/user/pets/home/all")
+        .get("https://petlov-backend.onrender.com/api/user/pets/home/all")
         .then((response) => {
           setResults(response.data.data);
           setLoaded(false);

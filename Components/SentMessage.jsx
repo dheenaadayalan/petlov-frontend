@@ -37,7 +37,7 @@ function SentMessage({ show, handleClose, content }) {
         ...values,
       };
       await axios
-        .post("http://localhost:4000/api/user/send/message", requestData, {
+        .post("https://petlov-backend.onrender.com/api/user/send/message", requestData, {
           headers: { token: userToken },
         })
         .then((res) => {

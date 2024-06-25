@@ -40,7 +40,7 @@ function EditPet({ petId }) {
 
   const fetchPetData = async () => {
     await axios
-      .get(`http://localhost:4000/api/user/petowner/pets/edit/${petId}`, {
+      .get(`https://petlov-backend.onrender.com/api/user/petowner/pets/edit/${petId}`, {
         headers: { token: userToken },
       })
       .then((res) => {
@@ -118,7 +118,7 @@ function EditPet({ petId }) {
       }
       await axios
         .post(
-          `http://localhost:4000/api/user/petowner/pets/update/${petId}`,
+          `https://petlov-backend.onrender.com/api/user/petowner/pets/update/${petId}`,
           values,
           {
             headers: { token: userToken },
@@ -142,7 +142,7 @@ function EditPet({ petId }) {
       console.log("its in");
       await axios
         .delete(
-          `http://localhost:4000/api/user/petowner/pets/delete/${petId}`,
+          `https://petlov-backend.onrender.com/api/user/petowner/pets/delete/${petId}`,
           {
             headers: { token: userToken },
           }

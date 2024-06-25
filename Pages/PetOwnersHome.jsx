@@ -23,7 +23,7 @@ function PetOwnersHome({ setPetId }) {
 
   const fetchData = async () => {
     await axios
-      .get("http://localhost:4000/api/user/petowner/data", {
+      .get("https://petlov-backend.onrender.com/api/user/petowner/data", {
         headers: { token: userToken },
       })
       .then((res) => {
@@ -39,7 +39,7 @@ function PetOwnersHome({ setPetId }) {
 
   const fetchDataMessage = async () => {
     await axios
-      .get("http://localhost:4000/api/user//get/all/petowner/message", {
+      .get("https://petlov-backend.onrender.com/api/user//get/all/petowner/message", {
         headers: { token: userToken },
       })
       .then((res) => {
