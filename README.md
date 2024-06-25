@@ -43,7 +43,7 @@ To get the project up and running on your local machine, follow these steps:
 - **Adoption Listings**: Search and browse pets available for adoption in your area.
 - **Pet Owner Profile**: Manage your your pets' adoption profiles.
 
-##contact
+## Contact
 If you have any questions or feedback, please reach out:
 - **Project Maintainer**: Dheenadayalan D
 - **Email**: [dheenadayalan.work@gmail.com](mailto:dheenadayalan.work@gmail.com)
