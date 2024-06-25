@@ -38,7 +38,6 @@ To get the project up and running on your local machine, follow these steps:
 
 
 ## Usage
-```markdown
 - **Homepage**: Explore featured pets available for adoption.
 - **User Profile**: Manage your personal details'
 - **Adoption Listings**: Search and browse pets available for adoption in your area.
